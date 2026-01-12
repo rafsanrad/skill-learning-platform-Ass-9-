@@ -1,0 +1,74 @@
+[
+  {
+    "skillId": 1,
+    "skillName": "Beginner Guitar Lessons",
+    "providerName": "Alex Martin",
+    "providerEmail": "alex@skillswap.com",
+    "price": 20,
+    "rating": 4.8,
+    "slotsAvailable": 3,
+    "description": "Acoustic guitar classes for complete beginners.",
+    "image": "https://i.ibb.co.com/pBZ012vT/images-q-tbn-ANd9-Gc-Qe3-Rv-PNEVvh-VScf-UNo76-Klxng-Gvl0j3w3z-JQ-s.png",
+    "category": "Music"
+  },
+  {
+    "skillId": 2,
+    "skillName": "Spoken English Practice",
+    "providerName": "Sara Hossain",
+    "providerEmail": "sara@skillswap.com",
+    "price": 10,
+    "rating": 4.6,
+    "slotsAvailable": 5,
+    "description": "Conversational English sessions for non-native speakers.",
+    "image": "https://i.ibb.co.com/pjKTGMJv/logo.png",
+    "category": "Language"
+  },
+  {
+    "skillId": 3,
+    "skillName": "Basic Web Development",
+    "providerName": "Rafid Khan",
+    "providerEmail": "rafid@skillswap.com",
+    "price": 25,
+    "rating": 4.9,
+    "slotsAvailable": 4,
+    "description": "Learn HTML, CSS, and basic JavaScript from scratch.",
+    "image": "https://i.ibb.co.com/gF3fCgBN/web-developer-logo-bold-black-code-browser-vector-56322445.jpg",
+    "category": "Technology"
+  },
+  {
+    "skillId": 4,
+    "skillName": "Photography for Beginners",
+    "providerName": "Nabila Rahman",
+    "providerEmail": "nabila@skillswap.com",
+    "price": 18,
+    "rating": 4.7,
+    "slotsAvailable": 6,
+    "description": "Learn camera basics, lighting, and composition.",
+    "image": "https://i.ibb.co.com/sJdTbSc5/frp-school-2.png",
+    "category": "Photography"
+  },
+  {
+    "skillId": 5,
+    "skillName": "Yoga & Mindfulness",
+    "providerName": "Ananya Das",
+    "providerEmail": "ananya@skillswap.com",
+    "price": 15,
+    "rating": 4.5,
+    "slotsAvailable": 8,
+    "description": "Beginner-friendly yoga sessions for stress relief.",
+    "image": "https://i.ibb.co.com/KjnPmL4t/il-fullxfull-3254773260-ctpa.jpg",
+    "category": "Health"
+  },
+  {
+    "skillId": 6,
+    "skillName": "Basic Cooking Skills",
+    "providerName": "Tanvir Ahmed",
+    "providerEmail": "tanvir@skillswap.com",
+    "price": 12,
+    "rating": 4.4,
+    "slotsAvailable": 5,
+    "description": "Simple home cooking lessons for beginners.",
+    "image": "https://i.ibb.co.com/kWsnmvd/stock-photo-cooking-vintage-logo-cooking-class-template-logo-with-spatula-and-whisk-modern-design-po.jpg",
+    "category": "Cooking"
+  }
+]
