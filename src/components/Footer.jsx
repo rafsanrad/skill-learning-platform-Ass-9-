@@ -3,7 +3,7 @@ import MyContainer from "./MyContainer";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-16">
+    <footer className="bg-gray-900 text-gray-300 ">
       <MyContainer>
         <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Info */}

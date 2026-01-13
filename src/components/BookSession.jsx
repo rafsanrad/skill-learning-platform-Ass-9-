@@ -18,7 +18,7 @@ const BookSession = () => {
   };
 
   return (
-    <section className="max-w-md mx-auto p-6 bg-base-100 shadow-md rounded-xl">
+    <section className="max-w-md mx-auto p-6 bg-base-100 shadow-md rounded-xl mb-15">
       <h2 className="text-2xl font-bold text-center mb-6">
         Book Session
       </h2>
