@@ -4,6 +4,8 @@ import { useLoaderData } from "react-router";
 import SkillCard from "../components/SkillCard";
 import MyContainer from "../components/MyContainer";
 import Testimonials from "../components/Testimonials";
+import TopRatedProviders from "../components/TopRatedProviders";
+import BookSession from "../components/BookSession";
 
 const Home = () => {
   const skills = useLoaderData();
@@ -25,7 +27,9 @@ const Home = () => {
               <SkillCard key={skill.skillId} skill={skill}></SkillCard>
             ))}
           </div>
+          <TopRatedProviders></TopRatedProviders>
           <Testimonials></Testimonials>
+          <BookSession></BookSession>
         </MyContainer>
       </div>
     </div>

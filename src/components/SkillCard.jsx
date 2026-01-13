@@ -4,7 +4,7 @@ import { MdOutlineStarBorderPurple500 } from "react-icons/md";
 const SkillCard = ({ skill }) => {
   const { image, skillName, rating, price, description } = skill;
   return (
-    <div className="card shadow-sm">
+    <div className="card shadow-sm transition-all duration-300 hover:-translate-y-3 hover:shadow-xl">
       <figure className="px-10 pt-5">
         <img src={image} alt="skill" className="rounded-xl" />
       </figure>
