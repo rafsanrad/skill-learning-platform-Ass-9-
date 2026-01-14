@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const SignIn = () => {
   return (
     <div
-      className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-linear-to-br from-orange-600 via-orange-400 to-yellow-300
+      className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-linear-to-br from-orange-500 via-orange-400 to-yellow-300
 
      relative overflow-hidden"
     >

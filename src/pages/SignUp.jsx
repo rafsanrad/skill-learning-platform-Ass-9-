@@ -1,11 +1,96 @@
-import React from "react";
-import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
+import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
 
 const SignUp = () => {
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+
+  const {
+    createUserWithEmailAndPasswordFunc,
+    updateProfileFunc,
+    setUser,
+    setLoading,
+  } = useContext(AuthContext);
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const displayName = e.target.name?.value;
+    const photoURl = e.target.photo?.value;
+    const email = e.target.email?.value;
+    const password = e.target.password?.value;
+    console.log("singuo function called", {
+      displayName,
+      photoURl,
+      email,
+      password,
+    });
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // console.log(passwordRegex);
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character."
+      );
+      return;
+    }
+
+    createUserWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        updateProfileFunc(displayName, photoURl)
+          .then(() => {
+            console.log(res);
+            setLoading(false);
+            toast.success(
+                "Signup successful.Check your email to validate your account."
+              );
+              setUser(null);
+              navigate("/signin");
+          })
+          .catch((e) => {
+            toast.error(e.message);
+          });
+      })
+      .catch((e) => {
+        console.log(e.code);
+        //for giving custom error msg in firebase.
+        if (e.code === "auth/email-already-in-use") {
+          toast.error("This email is already registered.");
+        } else if (e.code === "auth/invalid-email") {
+          toast.error("Invalid email address.");
+        } else if (e.code === "auth/weak-password") {
+          toast.error("Password should be at least 6 characters.");
+        } else if (e.code === "auth/user-not-found") {
+          toast.error("No user found with this email.");
+        } else if (e.code === "auth/wrong-password") {
+          toast.error("Incorrect password.");
+        } else if (e.code === "auth/missing-password") {
+          toast.error("Password is required.");
+        } else if (e.code === "auth/missing-email") {
+          toast.error("Email is required.");
+        } else if (e.code === "auth/user-disabled") {
+          toast.error("This account has been disabled.");
+        } else if (e.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Please try again later.");
+        } else if (e.code === "auth/operation-not-allowed") {
+          toast.error("Email/password sign-in is not enabled.");
+        } else if (e.code === "auth/invalid-credential") {
+          toast.error("Invalid login credentials.");
+        } else if (e.code === "auth/network-request-failed") {
+          toast.error("Network error. Please check your internet connection.");
+        } else {
+          toast.error(e.message || "Something went wrong. Please try again.");
+        }
+      });
+  };
   return (
     <div
-      className="min-h-[96vh] flex items-center justify-center  bg-linear-to-br from-red-600 via-rose-500 to-pink-400
+      className="min-h-[96vh] flex items-center justify-center  bg-linear-to-br from-red-500 via-rose-400 to-pink-400
 
 
       overflow-hidden"
@@ -27,7 +112,7 @@ const SignUp = () => {
               Sign Up
             </h2>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSignup} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Name</label>
                 <input
@@ -62,20 +147,23 @@ const SignUp = () => {
                   Password
                 </label>
                 <input
-                  //type={show ? "text" : "password"}
+                  type={show ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
                 <span
-                  //onClick={() => setShow(!show)}
+                  onClick={() => setShow(!show)}
                   className="absolute right-2 top-9 cursor-pointer"
                 >
-                  {/* {show ? <FaEye></FaEye> : <IoEyeOff></IoEyeOff>} */}
+                  {show ? <FaEye></FaEye> : <IoEyeOff></IoEyeOff>}
                 </span>
               </div>
 
-              <button type="submit" className="btn w-full bg-red-500 hover:bg-red-600 text-white border-none">
+              <button
+                type="submit"
+                className="btn w-full bg-red-500 hover:bg-red-600 text-white border-none"
+              >
                 Sign Up
               </button>
 
