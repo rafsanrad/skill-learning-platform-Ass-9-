@@ -12,6 +12,7 @@ const SkillDetailsCard = ({skill}) => {
       <p>Provider Name : {skill.providerName}</p>
       <p>Provider Email : {skill.providerEmail}</p>
       <p>Cateory : {skill.category}</p>
+      <p>Slots Available : {skill.slotsAvailable}</p>
       <p>Price : $ {skill.price}</p>
       <p>Rating : {skill.rating}</p>
       <Link to={"/"}><button className="bg-yellow-300 p-2 rounded-2xl">Go to home page</button></Link>

@@ -3,8 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const [show, setShow] = useState(false);

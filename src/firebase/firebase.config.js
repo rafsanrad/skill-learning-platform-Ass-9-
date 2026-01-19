@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBUsQ0pJPDXUOEQgmpBB-lK_IHQWnw5xFA",
-  authDomain: "skill-learning-platform.firebaseapp.com",
-  projectId: "skill-learning-platform",
-  storageBucket: "skill-learning-platform.firebasestorage.app",
-  messagingSenderId: "288805185426",
-  appId: "1:288805185426:web:d7f6a4604186f8c931834b"
+  apiKey:import.meta.env.VITE_apiKey, 
+  authDomain:import.meta.env.VITE_authDomain, 
+  projectId:import.meta.env.VITE_projectId, 
+  storageBucket:import.meta.env.VITE_storageBucket, 
+  messagingSenderId:import.meta.env.VITE_messagingSenderId, 
+  appId:import.meta.env.VITE_appId, 
 };
 
 // Initialize Firebase

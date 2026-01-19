@@ -56,7 +56,7 @@ const Navbar = () => {
             </button>
 
             <div
-              className="dropdown dropdown-end menu w-52 rounded-box bg-base-100 shadow-sm"
+              className="dropdown dropdown-end menu w-54 rounded-box bg-base-100 shadow-sm"
               popover="auto"
               id="popover-1"
               style={
@@ -64,7 +64,7 @@ const Navbar = () => {
               }
             >
               <h2 className="font-semibold text-xl">{user?.displayName}</h2>
-              <p className="text-white/80">{user?.email}</p>
+              <p className="text-xs">{user?.email}</p>
               <button onClick={handleSignout} className="bg-orange-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
                 Sign Out
               </button>

@@ -2,9 +2,9 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
-import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
