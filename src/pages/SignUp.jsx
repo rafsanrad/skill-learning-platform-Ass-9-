@@ -1,18 +1,18 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
-import MyContainer from "../components/MyContainer";
-import toast from "react-hot-toast";
-import { AuthContext } from "../context/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { Link, useNavigate } from "react-router";
+import MyContainer from "../components/MyContainer";
+import { toast } from "react-toastify";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-
   const {
     createUserWithEmailAndPasswordFunc,
     updateProfileFunc,
+    signoutUserFunc,
     setUser,
     setLoading,
   } = useContext(AuthContext);
@@ -20,15 +20,10 @@ const SignUp = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     const displayName = e.target.name?.value;
-    const photoURl = e.target.photo?.value;
+    const photoURL = e.target.photo?.value;
     const email = e.target.email?.value;
     const password = e.target.password?.value;
-    console.log("singuo function called", {
-      displayName,
-      photoURl,
-      email,
-      password,
-    });
+    console.log("sign up function called", { email, password });
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -40,23 +35,30 @@ const SignUp = () => {
       return;
     }
 
+    //1st step: user cration
+    // createUserWithEmailAndPassword(auth, email, password)
     createUserWithEmailAndPasswordFunc(email, password)
       .then((res) => {
-        updateProfileFunc(displayName, photoURl)
+        setLoading(true)
+        //2nd step:set profile update asynchronous function.
+        updateProfileFunc(displayName, photoURL)
           .then(() => {
             console.log(res);
-            setLoading(false);
-            toast.success(
-                "Signup successful.Check your email to validate your account."
+            //signout user
+            signoutUserFunc().then(() => {
+              toast.success(
+                "Signup successful."
               );
               setUser(null);
               navigate("/signin");
+            });
           })
           .catch((e) => {
             toast.error(e.message);
           });
       })
       .catch((e) => {
+        setLoading(false)
         console.log(e.code);
         //for giving custom error msg in firebase.
         if (e.code === "auth/email-already-in-use") {
@@ -90,10 +92,8 @@ const SignUp = () => {
   };
   return (
     <div
-      className="min-h-[96vh] flex items-center justify-center  bg-linear-to-br from-red-500 via-rose-400 to-pink-400
-
-
-      overflow-hidden"
+      className="min-h-[96vh] flex items-center justify-center bg-linear-to-br from-red-500 via-rose-500 to-pink-400
+      relative overflow-hidden"
     >
       <MyContainer>
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
@@ -156,14 +156,11 @@ const SignUp = () => {
                   onClick={() => setShow(!show)}
                   className="absolute right-2 top-9 cursor-pointer"
                 >
-                  {show ? <FaEye></FaEye> : <IoEyeOff></IoEyeOff>}
+                  {show ? <FaEye className="text-red-500"></FaEye> : <IoEyeOff className="text-red-800"></IoEyeOff>}
                 </span>
               </div>
 
-              <button
-                type="submit"
-                className="btn w-full bg-red-500 hover:bg-red-600 text-white border-none"
-              >
+              <button type="submit" className="btn w-full bg-red-500 hover:bg-red-600 text-white border-none">
                 Sign Up
               </button>
 

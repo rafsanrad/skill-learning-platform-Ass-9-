@@ -1,14 +1,87 @@
-import React from "react";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
-import { Link } from "react-router";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
 const SignIn = () => {
-  return (
-    <div
-      className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-linear-to-br from-orange-500 via-orange-400 to-yellow-300
+  const [show, setShow] = useState(false);
+  const location=useLocation();
+  const from=location.state || "/"; //private route theke kono state na ashle taake home page e pathai dibo.
+  const navigate=useNavigate()
 
-     relative overflow-hidden"
-    >
+  const {
+    signInWithEmailAndPasswordFunc,
+    signInwithGoogleFunc,
+    sendPasswordResetEmailFunc,
+    setLoading,
+  } = useContext(AuthContext);
+  
+  const emailRef = useRef(null); //dom reference use kore input field er value gulo ana jaay.
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const email = e.target.email?.value;
+    const password = e.target.password?.value;
+    
+    console.log("sign in function called", { email, password });
+    
+    signInWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        console.log("Login successful:", res.user);
+        setLoading(false);
+        toast.success("SignIn successful");
+        // Navigate after successful login
+        navigate(from, { replace: true });
+      })
+      .catch((e) => {
+        console.error("Login error:", e);
+        setLoading(false);
+        toast.error(e.message);
+      });
+  };
+
+  const handleGoogleSignin = () => {
+    signInwithGoogleFunc()
+      .then((res) => {
+        console.log("Google login successful:", res.user);
+        setLoading(false);
+        toast.success("SignIn successful");
+        navigate(from, { replace: true });
+      })
+      .catch((e) => {
+        console.error("Google login error:", e);
+        setLoading(false);
+        toast.error(e.message);
+      });
+  };
+
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    if(!email){
+      toast.error("Please enter your email first");
+      return;
+    }
+    sendPasswordResetEmailFunc(email)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        toast.success("Check your email to reset password.");
+      })
+      .catch((e) => {
+        setLoading(false);
+        toast.error(e.message);
+      });
+  };
+
+  return (
+    <div className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-linear-to-br from-orange-500 via-orange-400 to-yellow-400
+
+    relative overflow-hidden">
+
+
       <MyContainer>
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
           {/* Left section */}
@@ -24,7 +97,7 @@ const SignIn = () => {
 
           {/* Login card */}
           <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8">
-            <form className="space-y-5">
+            <form onSubmit={handleSignin} className="space-y-5">
               <h2 className="text-2xl font-semibold mb-2 text-center text-white">
                 Sign In
               </h2>
@@ -34,44 +107,41 @@ const SignIn = () => {
                 <input
                   type="email"
                   name="email"
-                  //ref={emailRef}
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
+                  ref={emailRef}
                   placeholder="example@email.com"
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  required
                 />
               </div>
 
               <div className="relative">
                 <label className="block text-sm mb-1">Password</label>
                 <input
-                  //type={show ? "text" : "password"}
+                  type={show ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  required
                 />
                 <span
-                  //onClick={() => setShow(!show)}
+                  onClick={() => setShow(!show)}
                   className="absolute right-2 top-9 cursor-pointer"
                 >
-                  {/* {show ? <FaEye></FaEye> : <IoEyeOff></IoEyeOff>} */}
+                  {show ? <FaEye className="text-orange-500"></FaEye> : <IoEyeOff className="text-orange-800"></IoEyeOff>}
                 </span>
               </div>
 
               {/* forget password button */}
               <button
                 className="hover:underline cursor-pointer"
-                // onClick={handleForgetPassword}
-                type="button" //eta na dile form submit hoye handlesignIn k call kore dibe.
+                onClick={handleForgetPassword}
+                type="button"
               >
                 Forget password?
               </button>
 
-              <button
-                type="submit"
-                className="btn w-full bg-orange-500 hover:bg-orange-600 text-white border-none"
-              >
-                Login 
+              <button type="submit" className="btn w-full bg-orange-500 hover:bg-orange-600 text-white border-none">
+                Login
               </button>
 
               {/* Divider */}
@@ -84,7 +154,7 @@ const SignIn = () => {
               {/* Google Signin */}
               <button
                 type="button"
-                // onClick={handleGoogleSignin}
+                onClick={handleGoogleSignin}
                 className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 <img
@@ -96,10 +166,10 @@ const SignIn = () => {
               </button>
 
               <p className="text-center text-sm text-white/80 mt-3">
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to="/signup"
-                  className="text-red-500 hover:text-white underline"
+                  className="text-red-600 hover:text-white underline"
                 >
                   Sign up
                 </Link>

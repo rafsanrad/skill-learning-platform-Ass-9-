@@ -1,8 +1,10 @@
+
 import React from "react";
 import { MdOutlineStarBorderPurple500 } from "react-icons/md";
+import { Link } from "react-router";
 
 const SkillCard = ({ skill }) => {
-  const { image, skillName, rating, price, description } = skill;
+  const { image, skillName, rating, price, description,skillId } = skill;
   return (
     <div className="card shadow-sm transition-all duration-300 hover:-translate-y-3 hover:shadow-xl">
       <figure className="px-10 pt-5">
@@ -25,7 +27,7 @@ const SkillCard = ({ skill }) => {
         </div>
 
         <div className="card-actions justify-center mt-4">
-          <button className="btn bg-orange-400">View Details</button>
+          <Link to={`/skill-details/${skillId}`}><button className="btn bg-orange-400">View Details</button></Link>
         </div>
       </div>
     </div>
