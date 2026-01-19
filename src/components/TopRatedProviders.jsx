@@ -1,4 +1,28 @@
+import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
+
 const TopRatedProviders = () => {
+  const [loading, setLoading] = useState(true);
+
+  // simulate loading (like API call)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // SHOW SPINNER
+  if (loading) {
+    return (
+      <div className="min-h-75 flex justify-center items-center">
+        <ClipLoader color="#f59e0b" size={60} />
+      </div>
+    );
+  }
+
+  // SHOW CONTENT
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
       <h2 className="text-3xl font-bold text-center mb-12">

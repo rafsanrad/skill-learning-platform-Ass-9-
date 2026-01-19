@@ -63,8 +63,7 @@ const Navbar = () => {
                 { positionAnchor: "--anchor-1" } /* as React.CSSProperties */
               }
             >
-              <h2 className="font-semibold text-xl">{user?.displayName}</h2>
-              <p className="text-xs">{user?.email}</p>
+              <h2 className="font-semibold text-xl mb-2">{user?.displayName}</h2>
               <button onClick={handleSignout} className="bg-orange-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
                 Sign Out
               </button>

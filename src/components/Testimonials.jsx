@@ -1,13 +1,33 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const Testimonials = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold text-center mb-12">
+      <h2
+        className="text-3xl font-bold text-center mb-12"
+        data-aos="fade-up"
+      >
         What Our Learners Say
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Card 1 */}
-        <div className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="100"
+          className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400"
+        >
           <div className="card-body">
             <span className="text-5xl text-orange-500">“</span>
 
@@ -38,7 +58,11 @@ const Testimonials = () => {
         </div>
 
         {/* Card 2 */}
-        <div className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400"
+        >
           <div className="card-body">
             <span className="text-5xl text-orange-500">“</span>
 
@@ -69,7 +93,11 @@ const Testimonials = () => {
         </div>
 
         {/* Card 3 */}
-        <div className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="card bg-base-100 shadow-md rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-yellow-400"
+        >
           <div className="card-body">
             <span className="text-5xl text-orange-500">“</span>
 
